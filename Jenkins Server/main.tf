@@ -85,25 +85,27 @@ module "sg" {
 
 module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 5.0"  # Always lock module versions for stability
+  version = "~> 5.0" # Always lock module versions for stability
 
   name = "jenkins-server"
 
-  ami                    = data.aws_ami.amazon_linux.id  # Add explicit AMI selection (recommended)
+  ami                    = data.aws_ami.amazon_linux.id # Add explicit AMI selection (recommended)
   instance_type          = var.instance_type
-  key_name               = var.key_name                  # Use variable for flexibility
+  key_name               = var.key_name # Use variable for flexibility
   monitoring             = true
   subnet_id              = module.vpc.public_subnets[0]
   vpc_security_group_ids = [module.sg.security_group_id]
 
   associate_public_ip_address = true
   user_data                   = file("${path.module}/jenkins-install.sh")
-  availability_zone           = data.aws_availability_zones.available.names[0]
+  #availability_zone           = data.aws_availability_zones.available.names[0]
+  availability_zone = data.aws_availability_zones.azs.names[0]
+
 
   root_block_device = [
     {
-      volume_type = "gp3"
-      volume_size = 20
+      volume_type           = "gp3"
+      volume_size           = 20
       delete_on_termination = true
     }
   ]
