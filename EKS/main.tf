@@ -69,7 +69,8 @@ terraform {
 }
 
 provider "aws" {
-  region = var.region
+  region = "us-east-1"
+  #region = var.region
 }
 
 data "aws_availability_zones" "azs" {}
