@@ -12,3 +12,9 @@ variable "instance_type" {
   description = "Instance Type"
   type        = string
 }
+
+variable "key_name" {
+  description = "SSH key name"
+  type        = string
+  #default     = "jenkins-server-key2"
+}
