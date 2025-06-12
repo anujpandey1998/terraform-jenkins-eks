@@ -33,7 +33,7 @@
    source = "terraform-aws-modules/eks/aws"
 
    cluster_name    = "my-eks-cluster"
-   cluster_version = "1.24"
+   cluster_version = "1.23.6"
 
    cluster_endpoint_public_access = true
 
